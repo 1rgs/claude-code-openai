@@ -15,6 +15,11 @@ import re
 from datetime import datetime
 import sys
 
+if "API_BASE" in os.environ:
+    litellm.api_base = os.environ["API_BASE"]
+elif "USE_OPENROUTER" in os.environ and os.environ["USE_OPENROUTER"].lower() in ('1', 'y', 'yes', 'true'):
+    litellm.api_base = "https://openrouter.ai/api/v1"
+
 # Load environment variables from .env file
 load_dotenv()
 
